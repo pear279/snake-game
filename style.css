@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: #eee;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 12px;
+  font-size: 2rem;
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.info strong {
+  color: #00ff88;
+}
+
+#gameCanvas {
+  display: block;
+  margin: 0 auto;
+  background: #0d1b2a;
+  border: 3px solid #00ff88;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+}
+
+.hint {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.message {
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  padding: 40px;
+  border-radius: 16px;
+  border: 2px solid #00ff88;
+  box-shadow: 0 0 40px rgba(0, 255, 136, 0.2);
+}
+
+.message h2 {
+  margin-bottom: 16px;
+  font-size: 1.8rem;
+}
+
+.message p {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+#finalScore {
+  color: #00ff88;
+  font-weight: bold;
+}
+
+#restartBtn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  background: #00ff88;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+#restartBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
