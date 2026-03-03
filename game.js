@@ -23,10 +23,18 @@
   const restartBtn = document.getElementById("restartBtn");
 
   function randomFood() {
-    food.x = Math.floor(Math.random() * tileCount);
-    food.y = Math.floor(Math.random() * tileCount);
-    const onSnake = snake.some((s) => s.x === food.x && s.y === food.y);
-    if (onSnake) randomFood();
+    let newFood;
+    let attempts = 0;
+    do {
+      newFood = {
+        x: Math.floor(Math.random() * tileCount),
+        y: Math.floor(Math.random() * tileCount)
+      };
+      attempts++;
+    } while (snake.some((s) => s.x === newFood.x && s.y === newFood.y) && attempts < 100);
+    
+    food.x = newFood.x;
+    food.y = newFood.y;
   }
 
   function draw() {
@@ -60,7 +68,7 @@
       endGame();
       return;
     }
-    if (snake.some((s) => s.x === head.x && s.y === head.y)) {
+    if (snake.slice(1).some((s) => s.x === head.x && s.y === head.y)) {
       endGame();
       return;
     }
@@ -84,6 +92,7 @@
     if (gameLoop) clearInterval(gameLoop);
     finalScoreEl.textContent = score;
     gameOverEl.classList.remove("hidden");
+    startOverlayEl.classList.add("hidden");
   }
 
   function startGame() {
@@ -114,10 +123,10 @@
   document.addEventListener("keydown", (e) => {
     if (startOverlayEl.classList.contains("hidden") === false) {
       e.preventDefault();
-      if (e.code === "ArrowRight" || e.code === "KeyD") dx = 1;
-      else if (e.code === "ArrowLeft" || e.code === "KeyA") dx = -1;
-      else if (e.code === "ArrowUp" || e.code === "KeyW") dy = -1;
-      else if (e.code === "ArrowDown" || e.code === "KeyS") dy = 1;
+      if (e.code === "ArrowRight" || e.code === "KeyD") { dx = 1; dy = 0; }
+      else if (e.code === "ArrowLeft" || e.code === "KeyA") { dx = -1; dy = 0; }
+      else if (e.code === "ArrowUp" || e.code === "KeyW") { dx = 0; dy = -1; }
+      else if (e.code === "ArrowDown" || e.code === "KeyS") { dx = 0; dy = 1; }
       else { dx = 1; dy = 0; }
       startGame();
       return;
@@ -143,10 +152,12 @@
   });
 
   restartBtn.addEventListener("click", () => {
-    startOverlayEl.classList.add("hidden");
     startGame();
   });
 
   randomFood();
   draw();
+  
+  // 确保游戏开始时显示开始界面
+  startOverlayEl.classList.remove("hidden");
 })();
